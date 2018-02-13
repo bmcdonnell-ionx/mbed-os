@@ -199,7 +199,7 @@ private:
     NonCopyable(const NonCopyable&);
 
     /**
-     * Declare copy assignement operator as private, any attempt to copy assign
+     * Declare copy assignment operator as private, any attempt to copy assign
      * a NonCopyable will fail at compile time.
      */
     NonCopyable& operator=(const NonCopyable&);
