@@ -79,7 +79,7 @@ public:
 
     /** Create a SPI master connected to the specified pins
      *
-     *  mosi or miso can be specfied as NC if not used
+     *  mosi or miso can be specified as NC if not used
      *
      *  @param mosi SPI Master Out, Slave In pin
      *  @param miso SPI Master In, Slave Out pin
@@ -121,7 +121,7 @@ public:
 
     /** Write to the SPI Slave and obtain the response
      *
-     *  The total number of bytes sent and recieved will be the maximum of
+     *  The total number of bytes sent and received will be the maximum of
      *  tx_length and rx_length. The bytes written will be padded with the
      *  value 0xff.
      *
