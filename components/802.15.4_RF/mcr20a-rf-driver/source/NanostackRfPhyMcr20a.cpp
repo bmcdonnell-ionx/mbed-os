@@ -1095,16 +1095,13 @@ static void PHY_InterruptHandler(void)
 {
     /* Disable and clear transceiver(IRQ_B) interrupt */
     MCR20Drv_IRQ_Disable();
-    irq_thread->signal_set(1);
+    irq_thread->flags_set(1);
 }
 
 static void PHY_InterruptThread(void)
 {
     for (;;) {
-        osEvent event = irq_thread->signal_wait(0);
-        if (event.status != osEventSignal) {
-            continue;
-        }
+        ThisThread::flags_wait_all(1);
         handle_interrupt();
     }
 }
