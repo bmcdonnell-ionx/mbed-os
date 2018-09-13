@@ -164,7 +164,7 @@ public:
      *
      * @param address This device's USB address
      */
-    virtual void set_address(uint8_t address) = 0;
+    virtual void set_address(std::uint8_t address) = 0;
 
     /**
      * Wake upstream devices
@@ -186,7 +186,7 @@ public:
      * @param max_packet The wMaxPacketSize value for endpoint 0
      * @return The actual size of endpoint 0
      */
-    virtual uint32_t ep0_set_max_packet(uint32_t max_packet) = 0;
+    virtual std::uint32_t ep0_set_max_packet(std::uint32_t max_packet) = 0;
 
     /**
      * Read the contents of the SETUP packet
@@ -194,7 +194,7 @@ public:
      * @param buffer Buffer to fill with data
      * @param size Size of buffer passed in
      */
-    virtual void ep0_setup_read_result(uint8_t *buffer, uint32_t size) = 0;
+    virtual void ep0_setup_read_result(std::uint8_t *buffer, std::uint32_t size) = 0;
 
     /**
      * Start receiving a packet of up to wMaxPacketSize on endpoint 0
@@ -202,14 +202,14 @@ public:
      * @param data Buffer to fill with the data read
      * @param size Size of buffer
      */
-    virtual void ep0_read(uint8_t *data, uint32_t size) = 0;
+    virtual void ep0_read(std::uint8_t *data, std::uint32_t size) = 0;
 
     /**
      * Read the contents of a received packet
      *
      * @return Size of data read
      */
-    virtual uint32_t ep0_read_result() = 0;
+    virtual std::uint32_t ep0_read_result() = 0;
 
     /**
      * Write a packet on endpoint 0
@@ -217,7 +217,7 @@ public:
      * @param buffer Buffer fill with data to send
      * @param size Size of data to send
      */
-    virtual void ep0_write(uint8_t *buffer, uint32_t size) = 0;
+    virtual void ep0_write(std::uint8_t *buffer, std::uint32_t size) = 0;
 
     /**
      * Protocol stall on endpoint 0
@@ -238,7 +238,7 @@ public:
      * @note This function cannot be used to configure endpoint 0. That must be done
      * with ep0_set_max_packet
      */
-    virtual bool endpoint_add(usb_ep_t endpoint, uint32_t max_packet, usb_ep_type_t type) = 0;
+    virtual bool endpoint_add(usb_ep_t endpoint, std::uint32_t max_packet, usb_ep_type_t type) = 0;
 
     /**
      * Disable an endpoint
@@ -276,7 +276,7 @@ public:
      *     the max packet size for this endpoint.
      * @return true if the read was successfully started, false otherwise
      */
-    virtual bool endpoint_read(usb_ep_t endpoint, uint8_t *data, uint32_t size) = 0;
+    virtual bool endpoint_read(usb_ep_t endpoint, std::uint8_t *data, std::uint32_t size) = 0;
 
     /**
      * Finish a read on the given endpoint
@@ -284,7 +284,7 @@ public:
      * @param endpoint Endpoint to check
      * @return true if data was read false otherwise
      */
-    virtual uint32_t endpoint_read_result(usb_ep_t endpoint) = 0;
+    virtual std::uint32_t endpoint_read_result(usb_ep_t endpoint) = 0;
 
     /**
      * Start a write on the given endpoint
@@ -294,7 +294,7 @@ public:
      * @param size Size of data to write
      * @return true if the data was prepared for transmit, false otherwise
      */
-    virtual bool endpoint_write(usb_ep_t endpoint, uint8_t *data, uint32_t size) = 0;
+    virtual bool endpoint_write(usb_ep_t endpoint, std::uint8_t *data, std::uint32_t size) = 0;
 
     /**
      * Abort the current transfer if it has not yet been sent

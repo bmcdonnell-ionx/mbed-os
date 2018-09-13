@@ -37,7 +37,7 @@ AsyncOp::~AsyncOp()
     MBED_ASSERT(_list == NULL);
 }
 
-void AsyncOp::wait(rtos::Mutex *host_mutex, uint32_t milliseconds)
+void AsyncOp::wait(rtos::Mutex *host_mutex, std::uint32_t milliseconds)
 {
     // Optimization so semaphore is only created if necessary
     core_util_critical_section_enter();

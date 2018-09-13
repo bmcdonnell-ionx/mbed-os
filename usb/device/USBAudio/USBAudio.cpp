@@ -21,6 +21,7 @@
 
 using mbed::Callback;
 using mbed::callback;
+using namespace std;
 
 #define SAMPLE_SIZE                 2
 #define XFER_FREQUENCY_HZ           1000

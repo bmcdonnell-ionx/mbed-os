@@ -18,6 +18,8 @@
 #include "events/mbed_events.h"
 #include "mbed_critical.h"
 
+using namespace std;
+
 
 PolledQueue::PolledQueue(mbed::Callback<void()> cb): _cb(cb)
 {

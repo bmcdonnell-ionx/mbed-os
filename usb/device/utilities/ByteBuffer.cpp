@@ -16,7 +16,9 @@
 
 #include "ByteBuffer.h"
 #include "mbed_assert.h"
-#include <string.h>
+#include <cstring>
+
+using namespace std;
 
 ByteBuffer::ByteBuffer(uint32_t size): _head(0), _tail(0), _size(0), _buf(NULL)
 {

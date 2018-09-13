@@ -18,7 +18,9 @@
 #include "EndpointResolver.h"
 #include "usb_phy_api.h"
 #include "BlockDevice.h"
-#include <stdlib.h>
+#include <cstdlib>
+
+using namespace std;
 
 #define DISK_OK         0x00
 #define NO_INIT         0x01

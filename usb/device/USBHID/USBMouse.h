@@ -72,26 +72,26 @@ enum MOUSE_TYPE {
  * @code
  * #include "mbed.h"
  * #include "USBMouse.h"
- * #include <math.h>
+ * #include <cmath>
  *
  * USBMouse mouse(true, ABS_MOUSE);
  *
  * int main(void)
  * {
- *   uint16_t x_center = (X_MAX_ABS - X_MIN_ABS)/2;
- *   uint16_t y_center = (Y_MAX_ABS - Y_MIN_ABS)/2;
- *   uint16_t x_screen = 0;
- *   uint16_t y_screen = 0;
+ *   std::uint16_t x_center = (X_MAX_ABS - X_MIN_ABS)/2;
+ *   std::uint16_t y_center = (Y_MAX_ABS - Y_MIN_ABS)/2;
+ *   std::uint16_t x_screen = 0;
+ *   std::uint16_t y_screen = 0;
  *
- *   uint32_t x_origin = x_center;
- *   uint32_t y_origin = y_center;
- *   uint32_t radius = 5000;
- *   uint32_t angle = 0;
+ *   std::uint32_t x_origin = x_center;
+ *   std::uint32_t y_origin = y_center;
+ *   std::uint32_t radius = 5000;
+ *   std::uint32_t angle = 0;
  *
  *   while (1)
  *   {
- *       x_screen = x_origin + cos((double)angle*3.14/180.0)*radius;
- *       y_screen = y_origin + sin((double)angle*3.14/180.0)*radius;
+ *       x_screen = x_origin + std::cos((double)angle*3.14/180.0)*radius;
+ *       y_screen = y_origin + std::sin((double)angle*3.14/180.0)*radius;
  *
  *       mouse.move(x_screen, y_screen);
  *       angle += 3;
@@ -119,7 +119,7 @@ public:
     * @param product_id Your product_id
     * @param product_release Your product_release
     */
-    USBMouse(bool connect_blocking = true, MOUSE_TYPE mouse_type = REL_MOUSE, uint16_t vendor_id = 0x1234, uint16_t product_id = 0x0001, uint16_t product_release = 0x0001);
+    USBMouse(bool connect_blocking = true, MOUSE_TYPE mouse_type = REL_MOUSE, std::uint16_t vendor_id = 0x1234, std::uint16_t product_id = 0x0001, std::uint16_t product_release = 0x0001);
 
     /**
     * Fully featured constructor
@@ -138,7 +138,7 @@ public:
     * @param product_id Your product_id
     * @param product_release Your product_release
     */
-    USBMouse(USBPhy *phy, MOUSE_TYPE mouse_type = REL_MOUSE, uint16_t vendor_id = 0x1234, uint16_t product_id = 0x0001, uint16_t product_release = 0x0001);
+    USBMouse(USBPhy *phy, MOUSE_TYPE mouse_type = REL_MOUSE, std::uint16_t vendor_id = 0x1234, std::uint16_t product_id = 0x0001, std::uint16_t product_release = 0x0001);
 
     /**
      * Destroy this object
@@ -157,7 +157,7 @@ public:
     * @param z wheel state (>0 to scroll down, <0 to scroll up)
     * @returns true if there is no error, false otherwise
     */
-    bool update(int16_t x, int16_t y, uint8_t buttons, int8_t z);
+    bool update(int16_t x, int16_t y, std::uint8_t buttons, int8_t z);
 
     /**
     * Move the cursor to (x, y)
@@ -174,7 +174,7 @@ public:
     * @param button button state (ex: press(MOUSE_LEFT))
     * @returns true if there is no error, false otherwise
     */
-    bool press(uint8_t button);
+    bool press(std::uint8_t button);
 
     /**
     * Release one or several buttons
@@ -182,7 +182,7 @@ public:
     * @param button button state (ex: release(MOUSE_LEFT))
     * @returns true if there is no error, false otherwise
     */
-    bool release(uint8_t button);
+    bool release(std::uint8_t button);
 
     /**
     * Double click (MOUSE_LEFT)
@@ -197,7 +197,7 @@ public:
     * @param button state of the buttons ( ex: clic(MOUSE_LEFT))
     * @returns true if there is no error, false otherwise
     */
-    bool click(uint8_t button);
+    bool click(std::uint8_t button);
 
     /**
     * Scrolling
@@ -212,7 +212,7 @@ public:
     *
     * @returns pointer to the report descriptor
     */
-    virtual const uint8_t *report_desc();
+    virtual const std::uint8_t *report_desc();
 
 protected:
     /*
@@ -220,15 +220,15 @@ protected:
     *
     * @returns pointer to the configuration descriptor
     */
-    virtual const uint8_t *configuration_desc(uint8_t index);
+    virtual const std::uint8_t *configuration_desc(std::uint8_t index);
 
 private:
     MOUSE_TYPE _mouse_type;
-    uint8_t _button;
-    uint8_t _configuration_descriptor[41];
+    std::uint8_t _button;
+    std::uint8_t _configuration_descriptor[41];
     PlatformMutex _mutex;
 
-    bool mouse_send(int8_t x, int8_t y, uint8_t buttons, int8_t z);
+    bool mouse_send(int8_t x, int8_t y, std::uint8_t buttons, int8_t z);
 };
 
 #endif

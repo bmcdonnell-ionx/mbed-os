@@ -19,7 +19,7 @@
 
 #include "USBDevice_Types.h"
 #include "USBPhy.h"
-#include <stdlib.h> // NULL
+#include <cstdlib> // NULL
 
 /**
  * \defgroup usb_device USB Device
@@ -61,14 +61,14 @@ public:
 
     struct setup_packet_t {
         struct {
-            uint8_t dataTransferDirection;
-            uint8_t Type;
-            uint8_t Recipient;
+            std::uint8_t dataTransferDirection;
+            std::uint8_t Type;
+            std::uint8_t Recipient;
         } bmRequestType;
-        uint8_t  bRequest;
-        uint16_t wValue;
-        uint16_t wIndex;
-        uint16_t wLength;
+        std::uint8_t  bRequest;
+        std::uint16_t wValue;
+        std::uint16_t wIndex;
+        std::uint16_t wLength;
     };
 
     /**
@@ -79,7 +79,7 @@ public:
      * @param product_id The USB product ID
      * @param product_release The device release number
      */
-    USBDevice(USBPhy *phy, uint16_t vendor_id, uint16_t product_id, uint16_t product_release);
+    USBDevice(USBPhy *phy, std::uint16_t vendor_id, std::uint16_t product_id, std::uint16_t product_release);
 
     /**
      * Cleanup this USBDevice
@@ -144,7 +144,7 @@ public:
     * @param callback Method pointer to be called when a packet is transferred
     * @returns true if successful, false otherwise
     */
-    bool endpoint_add(usb_ep_t endpoint, uint32_t max_packet, usb_ep_type_t type, ep_cb_t callback = NULL);
+    bool endpoint_add(usb_ep_t endpoint, std::uint32_t max_packet, usb_ep_type_t type, ep_cb_t callback = NULL);
 
     /**
     * Add an endpoint
@@ -156,7 +156,7 @@ public:
     * @returns true if successful, false otherwise
     */
     template<typename T>
-    bool endpoint_add(usb_ep_t endpoint, uint32_t max_packet, usb_ep_type_t type, void (T::*callback)())
+    bool endpoint_add(usb_ep_t endpoint, std::uint32_t max_packet, usb_ep_type_t type, void (T::*callback)())
     {
         return endpoint_add(endpoint, max_packet, type, static_cast<ep_cb_t>(callback));
     }
@@ -205,7 +205,7 @@ public:
      * for this endpoint.
      * @note This endpoint must already have been setup with endpoint_add
      */
-    uint32_t endpoint_max_packet_size(usb_ep_t endpoint);
+    std::uint32_t endpoint_max_packet_size(usb_ep_t endpoint);
 
     /**
      * Abort the current transfer on this endpoint
@@ -228,7 +228,7 @@ public:
      * @return true if the read was completed, otherwise false
      * @note This endpoint must already have been setup with endpoint_add
      */
-    bool read_start(usb_ep_t endpoint, uint8_t *buffer, uint32_t size);
+    bool read_start(usb_ep_t endpoint, std::uint8_t *buffer, std::uint32_t size);
 
     /**
      * Get the status of a read
@@ -236,7 +236,7 @@ public:
      * @param endpoint endpoint to get the status of
      * @return number of bytes read by this endpoint
      */
-    uint32_t read_finish(usb_ep_t endpoint);
+    std::uint32_t read_finish(usb_ep_t endpoint);
 
     /**
      * Write a data to the given endpoint
@@ -250,7 +250,7 @@ public:
      * max packet size of this endpoint
      * @note This endpoint must already have been setup with endpoint_add
      */
-    bool write_start(usb_ep_t endpoint, uint8_t *buffer, uint32_t size);
+    bool write_start(usb_ep_t endpoint, std::uint8_t *buffer, std::uint32_t size);
 
     /**
      * Get the status of a write
@@ -258,14 +258,14 @@ public:
      * @param endpoint endpoint to get the status of
      * @return number of bytes sent by this endpoint
      */
-    uint32_t write_finish(usb_ep_t endpoint);
+    std::uint32_t write_finish(usb_ep_t endpoint);
 
     /*
     * Get device descriptor.
     *
     * @returns pointer to the device descriptor
     */
-    virtual const uint8_t *device_desc();
+    virtual const std::uint8_t *device_desc();
 
     /*
     * Get configuration descriptor
@@ -273,56 +273,56 @@ public:
     * @param index descriptor index
     * @returns pointer to the configuration descriptor
     */
-    virtual const uint8_t *configuration_desc(uint8_t index) = 0;
+    virtual const std::uint8_t *configuration_desc(std::uint8_t index) = 0;
 
     /*
     * Get string lang id descriptor
     *
     * @return pointer to the string lang id descriptor
     */
-    virtual const uint8_t *string_langid_desc();
+    virtual const std::uint8_t *string_langid_desc();
 
     /*
     * Get string manufacturer descriptor
     *
     * @returns pointer to the string manufacturer descriptor
     */
-    virtual const uint8_t *string_imanufacturer_desc();
+    virtual const std::uint8_t *string_imanufacturer_desc();
 
     /*
     * Get string product descriptor
     *
     * @returns pointer to the string product descriptor
     */
-    virtual const uint8_t *string_iproduct_desc();
+    virtual const std::uint8_t *string_iproduct_desc();
 
     /*
     * Get string serial descriptor
     *
     * @returns pointer to the string serial descriptor
     */
-    virtual const uint8_t *string_iserial_desc();
+    virtual const std::uint8_t *string_iserial_desc();
 
     /*
     * Get string configuration descriptor
     *
     * @returns pointer to the string configuration descriptor
     */
-    virtual const uint8_t *string_iconfiguration_desc();
+    virtual const std::uint8_t *string_iconfiguration_desc();
 
     /*
     * Get string interface descriptor
     *
     * @returns pointer to the string interface descriptor
     */
-    virtual const uint8_t *string_iinterface_desc();
+    virtual const std::uint8_t *string_iinterface_desc();
 
     /*
     * Get the length of the report descriptor
     *
     * @returns length of the report descriptor
     */
-    virtual uint16_t report_desc_dength()
+    virtual std::uint16_t report_desc_dength()
     {
         return 0;
     };
@@ -403,7 +403,7 @@ protected:
      * @param data Buffer to send or receive if the result is Send or Receive
      * @param size Size to transfer if the result is Send or Receive
      */
-    void complete_request(RequestResult result, uint8_t *data=NULL, uint32_t size=0);
+    void complete_request(RequestResult result, std::uint8_t *data=NULL, std::uint32_t size=0);
 
     /**
     * Called by USBDevice on data stage completion
@@ -436,7 +436,7 @@ protected:
     *
     * Warning: Called in ISR context
     */
-    virtual void callback_set_configuration(uint8_t configuration) = 0;
+    virtual void callback_set_configuration(std::uint8_t configuration) = 0;
 
     /**
      * Called to complete a set configuration command
@@ -456,7 +456,7 @@ protected:
     *
     * Warning: Called in ISR context
     */
-    virtual void callback_set_interface(uint16_t interface, uint8_t alternate) = 0;
+    virtual void callback_set_interface(std::uint16_t interface, std::uint8_t alternate) = 0;
 
     /**
      * Called to complete a set interface command
@@ -472,7 +472,7 @@ protected:
      * @param index Configuration descriptor index ( 0 if only one configuration present )
      * @return A descriptor of the given type or NULL if none were found
      */
-    uint8_t *find_descriptor(uint8_t descriptor_type, uint8_t index = 0);
+    std::uint8_t *find_descriptor(std::uint8_t descriptor_type, std::uint8_t index = 0);
 
     /**
      * Get the endpoint table of this device
@@ -502,10 +502,10 @@ protected:
      */
     virtual void assert_locked();
 
-    uint16_t vendor_id;
-    uint16_t product_id;
-    uint16_t product_release;
-    uint8_t device_descriptor[18];
+    std::uint16_t vendor_id;
+    std::uint16_t product_id;
+    std::uint16_t product_release;
+    std::uint8_t device_descriptor[18];
 
 private:
     // USBPhyEvents
@@ -532,7 +532,7 @@ private:
     void _control_abort();
     void _control_abort_start();
     void _control_setup_continue();
-    void _decode_setup_packet(uint8_t *data, setup_packet_t *packet);
+    void _decode_setup_packet(std::uint8_t *data, setup_packet_t *packet);
     bool _request_get_configuration();
     bool _request_get_interface();
     bool _request_set_interface();
@@ -546,15 +546,15 @@ private:
 
     struct endpoint_info_t {
         ep_cb_t callback;
-        uint16_t max_packet_size;
-        uint16_t transfer_size;
-        uint8_t flags;
-        uint8_t pending;
+        std::uint16_t max_packet_size;
+        std::uint16_t transfer_size;
+        std::uint8_t flags;
+        std::uint8_t pending;
     };
 
     struct usb_device_t {
         volatile DeviceState state;
-        uint8_t configuration;
+        std::uint8_t configuration;
         bool suspended;
     };
 
@@ -575,8 +575,8 @@ private:
 
     struct complete_request_t {
         RequestResult result;
-        uint8_t *data;
-        uint32_t size;
+        std::uint8_t *data;
+        std::uint32_t size;
     };
 
     union complete_args_t {
@@ -586,9 +586,9 @@ private:
 
     struct control_transfer_t {
         setup_packet_t setup;
-        uint8_t *ptr;
-        uint32_t remaining;
-        uint8_t direction;
+        std::uint8_t *ptr;
+        std::uint32_t remaining;
+        std::uint8_t direction;
         bool zlp;
         bool notify;
         ControlState stage;
@@ -604,15 +604,15 @@ private:
     bool _endpoint_add_remove_allowed;
     control_transfer_t _transfer;
     usb_device_t _device;
-    uint32_t _max_packet_size_ep0;
+    std::uint32_t _max_packet_size_ep0;
     void (USBDevice::*_post_process)();
 
     bool _setup_ready;
     bool _abort_control;
 
-    uint16_t _current_interface;
-    uint8_t _current_alternate;
-    uint32_t _locked;
+    std::uint16_t _current_interface;
+    std::uint8_t _current_alternate;
+    std::uint32_t _locked;
 };
 
 #endif

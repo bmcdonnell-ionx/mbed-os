@@ -22,6 +22,8 @@
 #include "usb_phy_api.h"
 #include "mbed_wait_api.h"
 
+using namespace std;
+
 
 // Get endpoint direction
 #define IN_EP(endpoint)     ((endpoint) & 0x80U ? true : false)

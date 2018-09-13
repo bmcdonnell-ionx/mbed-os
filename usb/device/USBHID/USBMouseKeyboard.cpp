@@ -18,6 +18,8 @@
 #include "usb_phy_api.h"
 #include "mbed_wait_api.h"
 
+using namespace std;
+
 typedef struct {
     unsigned char usage;
     unsigned char modifier;

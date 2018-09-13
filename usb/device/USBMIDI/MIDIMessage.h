@@ -43,9 +43,9 @@
 class MIDIMessage {
 public:
 
-    MIDIMessage() : data(new uint8_t[MAX_MIDI_MESSAGE_SIZE + 1]), length(0) {}
+    MIDIMessage() : data(new std::uint8_t[MAX_MIDI_MESSAGE_SIZE + 1]), length(0) {}
 
-    MIDIMessage(uint8_t *buf) : data(new uint8_t[MAX_MIDI_MESSAGE_SIZE + 1]), length(0)
+    MIDIMessage(std::uint8_t *buf) : data(new std::uint8_t[MAX_MIDI_MESSAGE_SIZE + 1]), length(0)
     {
         for (int i = 0; i < 4; i++) {
             data[i] = buf[i];
@@ -84,7 +84,7 @@ public:
      * @param buf is a true MIDI message (not USBMidi message)
      * @param buf_len size of message
      */
-    void from_raw(uint8_t *buf, int buf_len)
+    void from_raw(std::uint8_t *buf, int buf_len)
     {
         length = buf_len + 1;
         if (length > MAX_MIDI_MESSAGE_SIZE) {
@@ -234,7 +234,7 @@ public:
     * @param len SysEx data length
     * @returns A MIDIMessage
     */
-    static MIDIMessage SysEx(uint8_t *data, int len)
+    static MIDIMessage SysEx(std::uint8_t *data, int len)
     {
         MIDIMessage msg;
         msg.from_raw(data, len);
@@ -265,7 +265,7 @@ public:
     MIDIMessageType type()
     {
         MIDIMessageType message_type;
-        uint8_t min_size;
+        std::uint8_t min_size;
         switch ((data[1] >> 4) & 0xF) {
             case 0x8:
                 // message, channel
@@ -467,8 +467,8 @@ public:
         return p - 8192; // 0 - 16383, 8192 is center
     }
 
-    uint8_t *data;
-    uint16_t length;
+    std::uint8_t *data;
+    std::uint16_t length;
 };
 
 #endif

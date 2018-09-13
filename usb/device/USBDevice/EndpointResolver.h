@@ -40,7 +40,7 @@ public:
      *
      * @param size Space reserved for control in and control out
      */
-    void endpoint_ctrl(uint32_t size);
+    void endpoint_ctrl(std::uint32_t size);
 
     /**
      * Return a free IN endpoint of the given size
@@ -49,7 +49,7 @@ public:
      * @param size Space to reserve for this endpoint
      * @return Endpoint index or 0 if there are not enough resources
      */
-    usb_ep_t endpoint_in(usb_ep_type_t type, uint32_t size);
+    usb_ep_t endpoint_in(usb_ep_type_t type, std::uint32_t size);
 
     /**
      * Return a free OUT endpoint of the given size
@@ -58,12 +58,12 @@ public:
      * @param size Space to reserve for this endpoint
      * @return Endpoint index or 0 if there are not enough resources
      */
-    usb_ep_t endpoint_out(usb_ep_type_t type, uint32_t size);
+    usb_ep_t endpoint_out(usb_ep_type_t type, std::uint32_t size);
 
     /**
      * Get next free endpoint
      */
-    usb_ep_t next_free_endpoint(bool in_not_out, usb_ep_type_t type, uint32_t size);
+    usb_ep_t next_free_endpoint(bool in_not_out, usb_ep_type_t type, std::uint32_t size);
 
     /**
      * Check if the endpoint configuration created so far is valid
@@ -83,8 +83,8 @@ private:
     int next_index(usb_ep_type_t type, bool in_not_out);
 
     const usb_ep_table_t *_table;
-    uint32_t _cost;
-    uint32_t _used;
+    std::uint32_t _cost;
+    std::uint32_t _used;
     bool _valid;
 };
 

@@ -16,6 +16,8 @@
 
 #include "USBPhyHw.h"
 
+using namespace std;
+
 static USBPhyHw *instance;
 
 USBPhy *get_usb_phy()

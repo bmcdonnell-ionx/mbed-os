@@ -87,7 +87,7 @@ protected:
      * @return required size
      * @note This call must be made in a critical section
      */
-    static uint32_t task_size(TaskBase *task)
+    static std::uint32_t task_size(TaskBase *task)
     {
 
         return task->size();
@@ -109,7 +109,7 @@ protected:
      * @note Every call to event_start must be paired with event_finish
      * @note This call must be made in a critical section
      */
-    static TaskBase::run_callback_t task_start(TaskBase *task, uint8_t *dest, uint32_t size)
+    static TaskBase::run_callback_t task_start(TaskBase *task, std::uint8_t *dest, std::uint32_t size)
     {
 
         return task->_start(dest, size);

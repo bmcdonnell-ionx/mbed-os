@@ -41,7 +41,7 @@ public:
     * @param product_id Your product_id
     * @param product_release Your product_release
     */
-    USBCDC(bool connect_blocking=true, uint16_t vendor_id=0x1f00, uint16_t product_id=0x2012, uint16_t product_release=0x0001);
+    USBCDC(bool connect_blocking=true, std::uint16_t vendor_id=0x1f00, std::uint16_t product_id=0x2012, std::uint16_t product_release=0x0001);
 
     /**
     * Fully featured constructor
@@ -59,7 +59,7 @@ public:
     * @param product_id Your product_id
     * @param product_release Your product_release
     */
-    USBCDC(USBPhy *phy, uint16_t vendor_id, uint16_t product_id, uint16_t product_release);
+    USBCDC(USBPhy *phy, std::uint16_t vendor_id, std::uint16_t product_id, std::uint16_t product_release);
 
     /**
      * Destroy this object
@@ -90,7 +90,7 @@ public:
     * @param size length of the buffer
     * @returns true if successful false if interrupted due to a state change
     */
-    bool send(uint8_t *buffer, uint32_t size);
+    bool send(std::uint8_t *buffer, std::uint32_t size);
 
     /**
      * Send what there is room for
@@ -100,7 +100,7 @@ public:
      * @param actual a pointer to where to store the number of bytes sent
      * @param now true to start data transmission, false to wait
      */
-    void send_nb(uint8_t *buffer, uint32_t size, uint32_t *actual, bool now = true);
+    void send_nb(std::uint8_t *buffer, std::uint32_t size, std::uint32_t *actual, bool now = true);
 
     /*
     * Read a buffer from a certain endpoint. Warning: blocking
@@ -114,7 +114,7 @@ public:
     *   or NULL to read the full size
     * @returns true if successful false if interrupted due to a state change
     */
-    bool receive(uint8_t *buffer, uint32_t size, uint32_t *actual=NULL);
+    bool receive(std::uint8_t *buffer, std::uint32_t size, std::uint32_t *actual=NULL);
 
     /**
      * Read from the receive buffer
@@ -123,7 +123,7 @@ public:
      * @param size maximum number of bytes read
      * @param actual a pointer to where to store the number of bytes actually received
      */
-    void receive_nb(uint8_t *buffer, uint32_t size, uint32_t *actual);
+    void receive_nb(std::uint8_t *buffer, std::uint32_t size, std::uint32_t *actual);
 
 protected:
     /*
@@ -131,21 +131,21 @@ protected:
     *
     * @returns pointer to the device descriptor
     */
-    virtual const uint8_t *device_desc();
+    virtual const std::uint8_t *device_desc();
 
     /*
     * Get string product descriptor
     *
     * @returns pointer to the string product descriptor
     */
-    virtual const uint8_t *string_iproduct_desc();
+    virtual const std::uint8_t *string_iproduct_desc();
 
     /*
     * Get string interface descriptor
     *
     * @returns pointer to the string interface descriptor
     */
-    virtual const uint8_t *string_iinterface_desc();
+    virtual const std::uint8_t *string_iinterface_desc();
 
     /*
     * Get configuration descriptor
@@ -153,7 +153,7 @@ protected:
     * @param index descriptor index
     * @returns pointer to the configuration descriptor
     */
-    virtual const uint8_t *configuration_desc(uint8_t index);
+    virtual const std::uint8_t *configuration_desc(std::uint8_t index);
 
     /*
     * Called by USBCallback_requestCompleted when CDC line coding is changed
@@ -186,8 +186,8 @@ protected:
     virtual void callback_state_change(DeviceState new_state);
     virtual void callback_request(const setup_packet_t *setup);
     virtual void callback_request_xfer_done(const setup_packet_t *setup, bool aborted);
-    virtual void callback_set_configuration(uint8_t configuration);
-    virtual void callback_set_interface(uint16_t interface, uint8_t alternate);
+    virtual void callback_set_configuration(std::uint8_t configuration);
+    virtual void callback_set_interface(std::uint16_t interface, std::uint8_t alternate);
 
     void _init();
 
@@ -203,24 +203,24 @@ protected:
     usb_ep_t _bulk_out;
     usb_ep_t _int_in;
 
-    uint8_t _cdc_line_coding[7];
-    uint8_t _cdc_new_line_coding[7];
-    uint8_t _config_descriptor[75];
+    std::uint8_t _cdc_line_coding[7];
+    std::uint8_t _cdc_new_line_coding[7];
+    std::uint8_t _config_descriptor[75];
 
     OperationList<AsyncWait> _connected_list;
     bool _terminal_connected;
 
     OperationList<AsyncWrite> _tx_list;
     bool _tx_in_progress;
-    uint8_t _tx_buffer[64];
-    uint8_t *_tx_buf;
-    uint32_t _tx_size;
+    std::uint8_t _tx_buffer[64];
+    std::uint8_t *_tx_buf;
+    std::uint32_t _tx_size;
 
     OperationList<AsyncRead> _rx_list;
     bool _rx_in_progress;
-    uint8_t _rx_buffer[64];
-    uint8_t *_rx_buf;
-    uint32_t _rx_size;
+    std::uint8_t _rx_buffer[64];
+    std::uint8_t *_rx_buf;
+    std::uint32_t _rx_size;
 };
 
 #endif

@@ -62,7 +62,7 @@ public:
     * @param product_id Your product_id
     * @param product_release Your product_release
     */
-    USBHID(bool connect_blocking = true, uint8_t output_report_length = 64, uint8_t input_report_length = 64, uint16_t vendor_id = 0x1234, uint16_t product_id = 0x0006, uint16_t product_release = 0x0001);
+    USBHID(bool connect_blocking = true, std::uint8_t output_report_length = 64, std::uint8_t input_report_length = 64, std::uint16_t vendor_id = 0x1234, std::uint16_t product_id = 0x0006, std::uint16_t product_release = 0x0001);
 
     /**
     * Fully featured constructor
@@ -82,7 +82,7 @@ public:
     * @param product_id Your product_id
     * @param product_release Your product_release
     */
-    USBHID(USBPhy *phy, uint8_t output_report_length, uint8_t input_report_length, uint16_t vendor_id, uint16_t product_id, uint16_t product_release);
+    USBHID(USBPhy *phy, std::uint8_t output_report_length, std::uint8_t input_report_length, std::uint16_t vendor_id, std::uint16_t product_id, std::uint16_t product_release);
 
     /**
      * Destroy this object
@@ -138,43 +138,43 @@ public:
     bool read_nb(HID_REPORT *report);
 
 protected:
-    uint16_t reportLength;
-    uint8_t reportDescriptor[27];
+    std::uint16_t reportLength;
+    std::uint8_t reportDescriptor[27];
 
     /*
     * Get the Report descriptor
     *
     * @returns pointer to the report descriptor
     */
-    virtual const uint8_t *report_desc();
+    virtual const std::uint8_t *report_desc();
 
     /*
     * Get the length of the report descriptor
     *
     * @returns the length of the report descriptor
     */
-    virtual uint16_t report_desc_length();
+    virtual std::uint16_t report_desc_length();
 
     /*
     * Get string product descriptor
     *
     * @returns pointer to the string product descriptor
     */
-    virtual const uint8_t *string_iproduct_desc();
+    virtual const std::uint8_t *string_iproduct_desc();
 
     /*
     * Get string interface descriptor
     *
     * @returns pointer to the string interface descriptor
     */
-    virtual const uint8_t *string_iinterface_desc();
+    virtual const std::uint8_t *string_iinterface_desc();
 
     /*
     * Get configuration descriptor
     *
     * @returns pointer to the configuration descriptor
     */
-    virtual const uint8_t *configuration_desc(uint8_t index);
+    virtual const std::uint8_t *configuration_desc(std::uint8_t index);
 
 
     /*
@@ -214,7 +214,7 @@ protected:
     * @param configuration Number of the configuration
     * @returns true if class handles this request
     */
-    virtual void callback_set_configuration(uint8_t configuration);
+    virtual void callback_set_configuration(std::uint8_t configuration);
 
     /*
     * Called by USBDevice layer in response to set_interface.
@@ -227,7 +227,7 @@ protected:
     *
     * Warning: Called in ISR context
     */
-    virtual void callback_set_interface(uint16_t interface, uint8_t alternate);
+    virtual void callback_set_interface(std::uint16_t interface, std::uint8_t alternate);
 
     /*
      * Called when there is a hid report that can be read
@@ -244,7 +244,7 @@ protected:
     usb_ep_t _int_out;
 
 private:
-    void _init(uint8_t output_report_length, uint8_t input_report_length);
+    void _init(std::uint8_t output_report_length, std::uint8_t input_report_length);
     void _send_isr();
     void _read_isr();
 
@@ -258,11 +258,11 @@ private:
     OperationList<AsyncRead> _read_list;
     bool _read_idle;
 
-    uint8_t _configuration_descriptor[41];
+    std::uint8_t _configuration_descriptor[41];
     HID_REPORT _input_report;
     HID_REPORT _output_report;
-    uint8_t _output_length;
-    uint8_t _input_length;
+    std::uint8_t _output_length;
+    std::uint8_t _input_length;
 
 
 };

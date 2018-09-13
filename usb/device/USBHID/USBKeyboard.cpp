@@ -17,6 +17,8 @@
 #include "USBKeyboard.h"
 #include "usb_phy_api.h"
 
+using namespace std;
+
 #define REPORT_ID_KEYBOARD 1
 #define REPORT_ID_VOLUME   3
 

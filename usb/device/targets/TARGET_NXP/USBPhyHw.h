@@ -33,33 +33,33 @@ public:
     virtual void unconfigure();
     virtual void sof_enable();
     virtual void sof_disable();
-    virtual void set_address(uint8_t address);
+    virtual void set_address(std::uint8_t address);
     virtual void remote_wakeup();
     virtual const usb_ep_table_t *endpoint_table();
 
-    virtual uint32_t ep0_set_max_packet(uint32_t max_packet);
-    virtual void ep0_setup_read_result(uint8_t *buffer, uint32_t size);
-    virtual void ep0_read(uint8_t *data, uint32_t size);
-    virtual uint32_t ep0_read_result();
-    virtual void ep0_write(uint8_t *buffer, uint32_t size);
+    virtual std::uint32_t ep0_set_max_packet(std::uint32_t max_packet);
+    virtual void ep0_setup_read_result(std::uint8_t *buffer, std::uint32_t size);
+    virtual void ep0_read(std::uint8_t *data, std::uint32_t size);
+    virtual std::uint32_t ep0_read_result();
+    virtual void ep0_write(std::uint8_t *buffer, std::uint32_t size);
     virtual void ep0_stall();
 
-    virtual bool endpoint_add(usb_ep_t endpoint, uint32_t max_packet, usb_ep_type_t type);
+    virtual bool endpoint_add(usb_ep_t endpoint, std::uint32_t max_packet, usb_ep_type_t type);
     virtual void endpoint_remove(usb_ep_t endpoint);
     virtual void endpoint_stall(usb_ep_t endpoint);
     virtual void endpoint_unstall(usb_ep_t endpoint);
 
-    virtual bool endpoint_read(usb_ep_t endpoint, uint8_t *data, uint32_t size);
-    virtual uint32_t endpoint_read_result(usb_ep_t endpoint);
-    virtual bool endpoint_write(usb_ep_t endpoint, uint8_t *data, uint32_t size);
+    virtual bool endpoint_read(usb_ep_t endpoint, std::uint8_t *data, std::uint32_t size);
+    virtual std::uint32_t endpoint_read_result(usb_ep_t endpoint);
+    virtual bool endpoint_write(usb_ep_t endpoint, std::uint8_t *data, std::uint32_t size);
     virtual void endpoint_abort(usb_ep_t endpoint);
 
     virtual void process();
 
 private:
     USBPhyEvents *events;
-    uint8_t *read_buffers[16];
-    uint16_t read_sizes[16];
+    std::uint8_t *read_buffers[16];
+    std::uint16_t read_sizes[16];
 
     static void _usbisr(void);
 };

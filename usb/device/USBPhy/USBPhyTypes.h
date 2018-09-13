@@ -17,9 +17,9 @@
 #ifndef USBPHY_TYPES_H
 #define USBPHY_TYPES_H
 
-#include <stdint.h>
+#include <cstdint>
 
-typedef uint8_t usb_ep_t;
+typedef std::uint8_t usb_ep_t;
 
 typedef enum {
     USB_EP_TYPE_CTRL = 0,
@@ -42,16 +42,16 @@ enum  {
     USB_EP_ATTR_DIR_IN_AND_OUT = 3 << 4,
     USB_EP_ATTR_DIR_MASK = 3 << 4
 };
-typedef uint8_t usb_ep_attr_t;
+typedef std::uint8_t usb_ep_attr_t;
 
 struct usb_ep_entry_t {
     usb_ep_attr_t attributes;
-    uint8_t byte_cost;
-    uint16_t base_cost;
+    std::uint8_t byte_cost;
+    std::uint16_t base_cost;
 };
 
 struct usb_ep_table_t {
-    uint32_t resources;
+    std::uint32_t resources;
     usb_ep_entry_t table[16];
 };
 

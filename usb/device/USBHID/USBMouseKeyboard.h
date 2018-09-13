@@ -86,7 +86,7 @@ public:
     * @param product_release Your preoduct_release (default: 0x0001)
     *
     */
-    USBMouseKeyboard(bool connect_blocking=true, MOUSE_TYPE mouse_type=REL_MOUSE, uint16_t vendor_id=0x0021, uint16_t product_id=0x0011, uint16_t product_release=0x0001);
+    USBMouseKeyboard(bool connect_blocking=true, MOUSE_TYPE mouse_type=REL_MOUSE, std::uint16_t vendor_id=0x0021, std::uint16_t product_id=0x0011, std::uint16_t product_release=0x0001);
 
     /**
     * Fully featured constructor
@@ -106,7 +106,7 @@ public:
     * @param product_release Your preoduct_release (default: 0x0001)
     *
     */
-    USBMouseKeyboard(USBPhy *phy, MOUSE_TYPE mouse_type=REL_MOUSE, uint16_t vendor_id=0x0021, uint16_t product_id=0x0011, uint16_t product_release=0x0001);
+    USBMouseKeyboard(USBPhy *phy, MOUSE_TYPE mouse_type=REL_MOUSE, std::uint16_t vendor_id=0x0021, std::uint16_t product_id=0x0011, std::uint16_t product_release=0x0001);
 
     /**
      * Destroy this object
@@ -125,7 +125,7 @@ public:
     * @param z wheel state (>0 to scroll down, <0 to scroll up)
     * @returns true if there is no error, false otherwise
     */
-    bool update(int16_t x, int16_t y, uint8_t buttons, int8_t z);
+    bool update(int16_t x, int16_t y, std::uint8_t buttons, int8_t z);
 
 
     /**
@@ -143,7 +143,7 @@ public:
     * @param button button state (ex: press(MOUSE_LEFT))
     * @returns true if there is no error, false otherwise
     */
-    bool press(uint8_t button);
+    bool press(std::uint8_t button);
 
     /**
     * Release one or several buttons
@@ -151,7 +151,7 @@ public:
     * @param button button state (ex: release(MOUSE_LEFT))
     * @returns true if there is no error, false otherwise
     */
-    bool release(uint8_t button);
+    bool release(std::uint8_t button);
 
     /**
     * Double click (MOUSE_LEFT)
@@ -166,7 +166,7 @@ public:
     * @param button state of the buttons ( ex: clic(MOUSE_LEFT))
     * @returns true if there is no error, false otherwise
     */
-    bool click(uint8_t button);
+    bool click(std::uint8_t button);
 
     /**
     * Scrolling
@@ -188,7 +188,7 @@ public:
     * @param key character to send
     * @returns true if there is no error, false otherwise
     */
-    bool key_code(uint8_t key, uint8_t modifier = 0);
+    bool key_code(std::uint8_t key, std::uint8_t modifier = 0);
 
     /**
     * Send a character
@@ -214,14 +214,14 @@ public:
     *
     * @returns status of lock keys
     */
-    uint8_t lock_status();
+    std::uint8_t lock_status();
 
     /*
     * To define the report descriptor. Warning: this method has to store the length of the report descriptor in reportLength.
     *
     * @returns pointer to the report descriptor
     */
-    virtual const uint8_t * report_desc();
+    virtual const std::uint8_t * report_desc();
 
     /*
     * Called when a data is received on the OUT endpoint. Useful to switch on LED of LOCK keys
@@ -233,11 +233,11 @@ public:
 
 private:
     MOUSE_TYPE _mouse_type;
-    uint8_t _button;
-    uint8_t _lock_status;
+    std::uint8_t _button;
+    std::uint8_t _lock_status;
     PlatformMutex _mutex;
 
-    bool _mouse_send(int8_t x, int8_t y, uint8_t buttons, int8_t z);
+    bool _mouse_send(int8_t x, int8_t y, std::uint8_t buttons, int8_t z);
 
     //dummy otherwise it doesn't compile (we must define all methods of an abstract class)
     virtual int _getc();

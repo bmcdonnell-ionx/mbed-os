@@ -44,7 +44,7 @@
 *     USBAudio audio(true, 44100, 2, 44100, 2);
 *
 *     printf("Looping audio\r\n");
-*     static uint8_t buf[128];
+*     static std::uint8_t buf[128];
 *     while (true) {
 *         if (!audio.read(buf, sizeof(buf))) {
 *             memset(buf, 0, sizeof(buf));
@@ -80,7 +80,7 @@ public:
     * @param product_id Your product_id
     * @param product_release Your product_release
     */
-    USBAudio(bool connect=true, uint32_t frequency_rx = 48000, uint8_t channel_count_rx = 1, uint32_t frequency_tx = 8000, uint8_t channel_count_tx = 1, uint32_t buffer_ms=10, uint16_t vendor_id = 0x7bb8, uint16_t product_id = 0x1111, uint16_t product_release = 0x0100);
+    USBAudio(bool connect=true, std::uint32_t frequency_rx = 48000, std::uint8_t channel_count_rx = 1, std::uint32_t frequency_tx = 8000, std::uint8_t channel_count_tx = 1, std::uint32_t buffer_ms=10, std::uint16_t vendor_id = 0x7bb8, std::uint16_t product_id = 0x1111, std::uint16_t product_release = 0x0100);
 
     /**
     * Fully featured constructor
@@ -103,7 +103,7 @@ public:
     * @param product_id Your product_id
     * @param product_release Your product_release
     */
-    USBAudio(USBPhy *phy, uint32_t frequency_rx, uint8_t channel_count_rx, uint32_t frequency_tx, uint8_t channel_count_tx, uint32_t buffer_ms, uint16_t vendor_id, uint16_t product_id, uint16_t product_release);
+    USBAudio(USBPhy *phy, std::uint32_t frequency_rx, std::uint8_t channel_count_rx, std::uint32_t frequency_tx, std::uint8_t channel_count_tx, std::uint32_t buffer_ms, std::uint16_t vendor_id, std::uint16_t product_id, std::uint16_t product_release);
 
     /**
      * Destroy this object
@@ -133,7 +133,7 @@ public:
     *
     * @returns true if successful
     */
-    bool read(uint8_t *buf, uint32_t size);
+    bool read(std::uint8_t *buf, std::uint32_t size);
 
     /**
     * Nonblocking audio data read
@@ -145,7 +145,7 @@ public:
     * @param actual size actually read
     * @note This function is safe to call from USBAudio callbacks.
     */
-    void read_nb(uint8_t *buf, uint32_t size, uint32_t *actual);
+    void read_nb(std::uint8_t *buf, std::uint32_t size, std::uint32_t *actual);
 
     /**
      * Return the number read packets dropped due to overflow
@@ -153,7 +153,7 @@ public:
      * @param clear Reset the overflow count back to 0
      * @return Number of packets dropped due to overflow
      */
-    uint32_t read_overflows(bool clear=false);
+    std::uint32_t read_overflows(bool clear=false);
 
     /**
      * Check if the audio read channel is open
@@ -175,7 +175,7 @@ public:
     *
     * @returns true if successful
     */
-    bool write(uint8_t *buf, uint32_t size);
+    bool write(std::uint8_t *buf, std::uint32_t size);
 
     /**
     * Nonblocking audio data write
@@ -187,7 +187,7 @@ public:
     * @param actual actual size written
     * @note This function is safe to call from USBAudio callbacks.
     */
-    void write_nb(uint8_t *buf, uint32_t size, uint32_t *actual);
+    void write_nb(std::uint8_t *buf, std::uint32_t size, std::uint32_t *actual);
 
     /**
      * Return the number write packets not sent due to underflow
@@ -196,7 +196,7 @@ public:
      * @return Number of packets that should have been
      *         sent but weren't due to overflow
      */
-    uint32_t write_underflows(bool clear=false);
+    std::uint32_t write_underflows(bool clear=false);
 
     /**
      * Check if the audio write channel is open
@@ -243,12 +243,12 @@ protected:
     virtual void callback_state_change(DeviceState new_state);
     virtual void callback_request(const setup_packet_t *setup);
     virtual void callback_request_xfer_done(const setup_packet_t *setup, bool aborted);
-    virtual void callback_set_configuration(uint8_t configuration);
-    virtual void callback_set_interface(uint16_t interface, uint8_t alternate);
+    virtual void callback_set_configuration(std::uint8_t configuration);
+    virtual void callback_set_interface(std::uint16_t interface, std::uint8_t alternate);
 
-    virtual const uint8_t *string_iproduct_desc();
-    virtual const uint8_t *string_iinterface_desc();
-    virtual const uint8_t *configuration_desc(uint8_t index);
+    virtual const std::uint8_t *string_iproduct_desc();
+    virtual const std::uint8_t *string_iinterface_desc();
+    virtual const std::uint8_t *configuration_desc(std::uint8_t index);
 
 private:
 
@@ -261,7 +261,7 @@ private:
         Opened
     };
 
-    void _init(uint32_t frequency_rx, uint8_t channel_count_rx, uint32_t frequency_tx, uint8_t channel_count_tx, uint32_t buffer_ms);
+    void _init(std::uint32_t frequency_rx, std::uint8_t channel_count_rx, std::uint32_t frequency_tx, std::uint8_t channel_count_tx, std::uint32_t buffer_ms);
 
     /*
     * Call to rebuild the configuration descriptor
@@ -288,19 +288,19 @@ private:
     float _volume;
 
     // mute state
-    uint8_t _mute;
+    std::uint8_t _mute;
 
     // Volume Current Value
-    uint16_t _vol_cur;
+    std::uint16_t _vol_cur;
 
     // Volume Minimum Value
-    uint16_t _vol_min;
+    std::uint16_t _vol_min;
 
     // Volume Maximum Value
-    uint16_t _vol_max;
+    std::uint16_t _vol_max;
 
     // Volume Resolution
-    uint16_t _vol_res;
+    std::uint16_t _vol_res;
 
     // callback to update volume
     mbed::Callback<void()> _update_vol;
@@ -312,31 +312,31 @@ private:
     mbed::Callback<void(AudioEvent)> _rx_done;
 
     // Number of times data was dropped due to an overflow
-    uint32_t _rx_overflow;
+    std::uint32_t _rx_overflow;
 
     // Number of times data was not sent due to an underflow
-    uint32_t _tx_underflow;
+    std::uint32_t _tx_underflow;
 
     // frequency in Hz
-    uint32_t _tx_freq;
-    uint32_t _rx_freq;
+    std::uint32_t _tx_freq;
+    std::uint32_t _rx_freq;
 
     // mono, stereo,...
-    uint8_t _rx_channel_count;
-    uint8_t _tx_channel_count;
+    std::uint8_t _rx_channel_count;
+    std::uint8_t _tx_channel_count;
 
     bool _tx_idle;
-    uint16_t _tx_frame_fract;
-    uint16_t _tx_whole_frames_per_xfer;
-    uint16_t _tx_fract_frames_per_xfer;
+    std::uint16_t _tx_frame_fract;
+    std::uint16_t _tx_whole_frames_per_xfer;
+    std::uint16_t _tx_fract_frames_per_xfer;
 
     // size of the maximum packet for the isochronous endpoint
-    uint16_t _tx_packet_size_max;
-    uint16_t _rx_packet_size_max;
+    std::uint16_t _tx_packet_size_max;
+    std::uint16_t _rx_packet_size_max;
 
     // Buffer used for the isochronous transfer
-    uint8_t *_tx_packet_buf;
-    uint8_t *_rx_packet_buf;
+    std::uint8_t *_tx_packet_buf;
+    std::uint8_t *_rx_packet_buf;
 
     // Holding buffer
     ByteBuffer _tx_queue;
@@ -361,14 +361,14 @@ private:
     usb_ep_t _episo_in;     // tx endpoint
 
     // channel config in the configuration descriptor: master, left, right
-    uint8_t _channel_config_rx;
-    uint8_t _channel_config_tx;
+    std::uint8_t _channel_config_rx;
+    std::uint8_t _channel_config_tx;
 
     // configuration descriptor
-    uint8_t _config_descriptor[183];
+    std::uint8_t _config_descriptor[183];
 
     // buffer for control requests
-    uint8_t _control_receive[2];
+    std::uint8_t _control_receive[2];
 
 };
 

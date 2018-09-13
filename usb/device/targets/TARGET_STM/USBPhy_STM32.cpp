@@ -33,6 +33,8 @@
 #include "USBPhyHw.h"
 #include "pinmap.h"
 
+using namespace std;
+
 
 /* endpoint conversion macros */
 #define EP_TO_LOG(ep)       ((ep) & 0x7F)

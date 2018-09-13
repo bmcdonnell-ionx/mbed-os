@@ -479,11 +479,11 @@ public:
 
 protected:
 
-    virtual uint32_t size() {
+    virtual std::uint32_t size() {
         return sizeof(_args);
     }
 
-    virtual run_callback_t start(void *data, uint32_t max_size) {
+    virtual run_callback_t start(void *data, std::uint32_t max_size) {
         All::ops::copy(data, (void*)&_args);
         return &All::ops::call;
     }
@@ -513,11 +513,11 @@ public:
 
 protected:
 
-    virtual uint32_t size() {
+    virtual std::uint32_t size() {
         return sizeof(_args);
     }
 
-    virtual run_callback_t start(void *data, uint32_t max_size) {
+    virtual run_callback_t start(void *data, std::uint32_t max_size) {
         All::ops::copy(data, (void*)&_args);
         return &All::ops::call;
     }
@@ -575,11 +575,11 @@ public:
 
 protected:
 
-    virtual uint32_t size() {
+    virtual std::uint32_t size() {
         return sizeof(_args);
     }
 
-    virtual run_callback_t start(void *data, uint32_t max_size) {
+    virtual run_callback_t start(void *data, std::uint32_t max_size) {
         All::ops::copy(data, (void*)&_args);
         return &All::ops::call;
     }

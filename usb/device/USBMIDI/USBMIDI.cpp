@@ -18,6 +18,8 @@
 #include "EndpointResolver.h"
 #include "usb_phy_api.h"
 
+using namespace std;
+
 #define FLAG_WRITE_DONE     (1 << 0)
 #define FLAG_DISCONNECT     (1 << 1)
 #define FLAG_CONNECT        (1 << 2)

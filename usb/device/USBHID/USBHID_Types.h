@@ -17,7 +17,7 @@
 #ifndef USBCLASS_HID_TYPES
 #define USBCLASS_HID_TYPES
 
-#include <stdint.h>
+#include <cstdint>
 
 /* */
 #define HID_VERSION_1_11    (0x0111)
@@ -85,8 +85,8 @@
 #define MAX_HID_REPORT_SIZE (64)
 
 typedef struct {
-    uint32_t length;
-    uint8_t data[MAX_HID_REPORT_SIZE];
+    std::uint32_t length;
+    std::uint8_t data[MAX_HID_REPORT_SIZE];
 } HID_REPORT;
 
 #endif

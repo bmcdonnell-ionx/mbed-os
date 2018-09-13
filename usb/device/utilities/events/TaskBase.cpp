@@ -120,7 +120,7 @@ void TaskBase::post()
     core_util_critical_section_exit();
 }
 
-TaskBase::run_callback_t TaskBase::_start(void *buffer, uint32_t size)
+TaskBase::run_callback_t TaskBase::_start(void *buffer, std::uint32_t size)
 {
     // Each call to _start must result in a call to _finish
     MBED_ASSERT(_start_count < 0xFFFF);

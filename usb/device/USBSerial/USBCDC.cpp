@@ -19,6 +19,8 @@
 #include "AsyncOp.h"
 #include "usb_phy_api.h"
 
+using namespace std;
+
 static const uint8_t cdc_line_coding_default[7] = {0x80, 0x25, 0x00, 0x00, 0x00, 0x00, 0x08};
 
 #define DEFAULT_CONFIGURATION (1)

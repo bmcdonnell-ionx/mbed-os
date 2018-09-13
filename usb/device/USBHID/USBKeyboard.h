@@ -109,7 +109,7 @@ public:
     * @param product_id Your product_id
     * @param product_release Your product_release
     */
-    USBKeyboard(bool connect_blocking = true, uint16_t vendor_id = 0x1235, uint16_t product_id = 0x0050, uint16_t product_release = 0x0001);
+    USBKeyboard(bool connect_blocking = true, std::uint16_t vendor_id = 0x1235, std::uint16_t product_id = 0x0050, std::uint16_t product_release = 0x0001);
 
     /**
     * Fully featured constructor
@@ -127,7 +127,7 @@ public:
     * @param product_id Your product_id
     * @param product_release Your product_release
     */
-    USBKeyboard(USBPhy *phy, uint16_t vendor_id = 0x1235, uint16_t product_id = 0x0050, uint16_t product_release = 0x0001);
+    USBKeyboard(USBPhy *phy, std::uint16_t vendor_id = 0x1235, std::uint16_t product_id = 0x0050, std::uint16_t product_release = 0x0001);
 
     /**
      * Destroy this object
@@ -149,7 +149,7 @@ public:
     * @param key character to send
     * @returns true if there is no error, false otherwise
     */
-    bool key_code(uint8_t key, uint8_t modifier = 0);
+    bool key_code(std::uint8_t key, std::uint8_t modifier = 0);
 
     /**
     * Send a character
@@ -172,7 +172,7 @@ public:
     *
     * @returns pointer to the report descriptor
     */
-    virtual const uint8_t *report_desc();
+    virtual const std::uint8_t *report_desc();
 
     /*
     * Called when a data is received on the OUT endpoint. Useful to switch on LED of LOCK keys
@@ -187,7 +187,7 @@ public:
     *
     * @returns status of lock keys
     */
-    uint8_t lock_status();
+    std::uint8_t lock_status();
 
 protected:
     /*
@@ -195,15 +195,15 @@ protected:
     *
     * @returns pointer to the configuration descriptor
     */
-    virtual const uint8_t *configuration_desc(uint8_t index);
+    virtual const std::uint8_t *configuration_desc(std::uint8_t index);
 
 private:
 
     //dummy otherwise it doesn't compile (we must define all methods of an abstract class)
     virtual int _getc();
 
-    uint8_t _configuration_descriptor[41];
-    uint8_t _lock_status;
+    std::uint8_t _configuration_descriptor[41];
+    std::uint8_t _lock_status;
     PlatformMutex _mutex;
 
 };

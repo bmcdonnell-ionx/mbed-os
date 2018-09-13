@@ -28,6 +28,8 @@
 #include "mbed_critical.h"
 #include "mbed_toolchain.h"
 
+using namespace std;
+
 static USBPhyHw *instance;
 
 static volatile int epComplete = 0;

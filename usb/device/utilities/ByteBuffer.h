@@ -17,7 +17,7 @@
 #ifndef BYTE_BUFFER_H
 #define BYTE_BUFFER_H
 
-#include <stdint.h>
+#include <cstdint>
 
 class ByteBuffer {
 public:
@@ -27,7 +27,7 @@ public:
      *
      * @param size Number of bytes this buffer can hold
      */
-    ByteBuffer(uint32_t size=0);
+    ByteBuffer(std::uint32_t size=0);
 
     /**
      * Delete this byte buffer
@@ -41,7 +41,7 @@ public:
      *
      * @param size New buffer size
      */
-    void resize(uint32_t size);
+    void resize(std::uint32_t size);
 
     /**
      * Add a single byte to this buffer
@@ -50,7 +50,7 @@ public:
      *
      * @param data byte to add
      */
-    void push(uint8_t data);
+    void push(std::uint8_t data);
 
     /**
      * Write a block of data to this ByteBuffer
@@ -60,14 +60,14 @@ public:
      * @param data Block of data to write
      * @param size Size of data to write
      */
-    void write(uint8_t *data, uint32_t size);
+    void write(std::uint8_t *data, std::uint32_t size);
 
     /**
      * Remove a byte from this buffer
      *
      * @return data byte
      */
-    uint8_t pop();
+    std::uint8_t pop();
 
     /**
      * Read a block of data from this ByteBuffer into a buffer pointed by 'data'
@@ -77,21 +77,21 @@ public:
      * @param data Block of data to read
      * @param size Size of data to read
      */
-    void read(uint8_t *data, uint32_t size);
+    void read(std::uint8_t *data, std::uint32_t size);
 
     /**
      * Return the number bytes in this byte buffer
      *
      * @return Number of used bytes
      */
-    uint32_t size();
+    std::uint32_t size();
 
     /**
      * Return the number of additional bytes this buffer can hold
      *
      * @return Number of free bytes
      */
-    uint32_t free();
+    std::uint32_t free();
 
     /**
      * Check if this byte buffer is full
@@ -109,10 +109,10 @@ public:
 
 private:
 
-    uint32_t _head;
-    uint32_t _tail;
-    uint32_t _size;
-    uint8_t *_buf;
+    std::uint32_t _head;
+    std::uint32_t _tail;
+    std::uint32_t _size;
+    std::uint8_t *_buf;
 };
 
 

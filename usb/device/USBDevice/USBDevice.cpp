@@ -19,7 +19,9 @@
 #include "usb_phy_api.h"
 #include "mbed_critical.h"
 #include "mbed_assert.h"
-#include <string.h> // memset
+#include <cstring> // memset
+
+using namespace std;
 
 //#define DEBUG
 

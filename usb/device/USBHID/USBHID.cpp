@@ -18,6 +18,8 @@
 #include "EndpointResolver.h"
 #include "usb_phy_api.h"
 
+using namespace std;
+
 class USBHID::AsyncSend: public AsyncOp {
 public:
     AsyncSend(USBHID *hid, const HID_REPORT *report): hid(hid), report(report), result(false)

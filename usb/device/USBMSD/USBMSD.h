@@ -70,7 +70,7 @@ public:
     * @param product_id Your product_id
     * @param product_release Your preoduct_release
     */
-    USBMSD(BlockDevice *bd, bool connect_blocking = true, uint16_t vendor_id = 0x0703, uint16_t product_id = 0x0104, uint16_t product_release = 0x0001);
+    USBMSD(BlockDevice *bd, bool connect_blocking = true, std::uint16_t vendor_id = 0x0703, std::uint16_t product_id = 0x0104, std::uint16_t product_release = 0x0001);
 
     /**
     * Fully featured constructor
@@ -89,7 +89,7 @@ public:
     * @param product_id Your product_id
     * @param product_release Your preoduct_release
     */
-    USBMSD(USBPhy *phy, BlockDevice *bd, uint16_t vendor_id, uint16_t product_id, uint16_t product_release);
+    USBMSD(USBPhy *phy, BlockDevice *bd, std::uint16_t vendor_id, std::uint16_t product_id, std::uint16_t product_release);
 
     /**
      * Destroy this object
@@ -133,7 +133,7 @@ protected:
     * @param count number of blocks to read
     * @returns 0 if successful
     */
-    virtual int disk_read(uint8_t *data, uint64_t block, uint8_t count);
+    virtual int disk_read(std::uint8_t *data, std::uint64_t block, std::uint8_t count);
 
     /*
     * write one or more blocks on a storage chip
@@ -143,7 +143,7 @@ protected:
     * @param count number of blocks to write
     * @returns 0 if successful
     */
-    virtual int disk_write(const uint8_t *data, uint64_t block, uint8_t count);
+    virtual int disk_write(const std::uint8_t *data, std::uint64_t block, std::uint8_t count);
 
     /*
     * Disk initilization
@@ -155,14 +155,14 @@ protected:
     *
     * @returns number of blocks
     */
-    virtual uint64_t disk_sectors();
+    virtual std::uint64_t disk_sectors();
 
     /*
     * Return memory size
     *
     * @returns memory size
     */
-    virtual uint64_t disk_size();
+    virtual std::uint64_t disk_size();
 
     /*
     * To check the status of the storage chip
@@ -183,21 +183,21 @@ private:
 
     // Bulk-only CBW
     typedef MBED_PACKED(struct) {
-        uint32_t Signature;
-        uint32_t Tag;
-        uint32_t DataLength;
-        uint8_t  Flags;
-        uint8_t  LUN;
-        uint8_t  CBLength;
-        uint8_t  CB[16];
+        std::uint32_t Signature;
+        std::uint32_t Tag;
+        std::uint32_t DataLength;
+        std::uint8_t  Flags;
+        std::uint8_t  LUN;
+        std::uint8_t  CBLength;
+        std::uint8_t  CB[16];
     } CBW;
 
     // Bulk-only CSW
     typedef MBED_PACKED(struct) {
-        uint32_t Signature;
-        uint32_t Tag;
-        uint32_t DataResidue;
-        uint8_t  Status;
+        std::uint32_t Signature;
+        std::uint32_t Tag;
+        std::uint32_t DataResidue;
+        std::uint8_t  Status;
     } CSW;
 
     // If this class has been initialized
@@ -213,29 +213,29 @@ private:
     CSW _csw;
 
     // addr where will be read or written data
-    uint32_t _addr;
+    std::uint32_t _addr;
 
     // length of a reading or writing
-    uint32_t _length;
+    std::uint32_t _length;
 
     // memory OK (after a memoryVerify)
     bool _mem_ok;
 
     // cache in RAM before writing in memory. Useful also to read a block.
-    uint8_t *_page;
+    std::uint8_t *_page;
 
     int _block_size;
-    uint64_t _memory_size;
-    uint64_t _block_count;
+    std::uint64_t _memory_size;
+    std::uint64_t _block_count;
 
     // endpoints
     usb_ep_t _bulk_in;
     usb_ep_t _bulk_out;
-    uint8_t _bulk_in_buf[64];
-    uint8_t _bulk_out_buf[64];
+    std::uint8_t _bulk_in_buf[64];
+    std::uint8_t _bulk_out_buf[64];
     bool _out_ready;
     bool _in_ready;
-    uint32_t _bulk_out_size;
+    std::uint32_t _bulk_out_size;
 
     // Interrupt to thread deferral
     events::PolledQueue _queue;
@@ -250,13 +250,13 @@ private:
     rtos::Mutex _mutex;
 
     // space for config descriptor
-    uint8_t _configuration_descriptor[32];
+    std::uint8_t _configuration_descriptor[32];
 
-    virtual const uint8_t *string_iproduct_desc();
-    virtual const uint8_t *string_iinterface_desc();
-    virtual const uint8_t *configuration_desc(uint8_t index);
-    virtual void callback_set_configuration(uint8_t configuration);
-    virtual void callback_set_interface(uint16_t interface, uint8_t alternate);
+    virtual const std::uint8_t *string_iproduct_desc();
+    virtual const std::uint8_t *string_iinterface_desc();
+    virtual const std::uint8_t *configuration_desc(std::uint8_t index);
+    virtual void callback_set_configuration(std::uint8_t configuration);
+    virtual void callback_set_interface(std::uint16_t interface, std::uint8_t alternate);
     virtual void callback_state_change(DeviceState new_state);
     virtual void callback_request(const setup_packet_t *setup);
     virtual void callback_request_xfer_done(const setup_packet_t *setup, bool aborted);
@@ -272,13 +272,13 @@ private:
 
     void _init();
     void _process();
-    void _write_next(uint8_t *data, uint32_t size);
+    void _write_next(std::uint8_t *data, std::uint32_t size);
     void _read_next();
 
-    void CBWDecode(uint8_t *buf, uint16_t size);
+    void CBWDecode(std::uint8_t *buf, std::uint16_t size);
     void sendCSW(void);
     bool inquiryRequest(void);
-    bool write(uint8_t *buf, uint16_t size);
+    bool write(std::uint8_t *buf, std::uint16_t size);
     bool readFormatCapacity();
     bool readCapacity(void);
     bool infoTransfer(void);
@@ -286,8 +286,8 @@ private:
     bool modeSense6(void);
     void testUnitReady(void);
     bool requestSense(void);
-    void memoryVerify(uint8_t *buf, uint16_t size);
-    void memoryWrite(uint8_t *buf, uint16_t size);
+    void memoryVerify(std::uint8_t *buf, std::uint16_t size);
+    void memoryWrite(std::uint8_t *buf, std::uint16_t size);
     void msd_reset();
     void fail();
 };

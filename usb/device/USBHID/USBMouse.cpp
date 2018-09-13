@@ -19,6 +19,8 @@
 #include "PlatformMutex.h"
 #include "mbed_wait_api.h"
 
+using namespace std;
+
 
 USBMouse::USBMouse(bool connect_blocking, MOUSE_TYPE mouse_type, uint16_t vendor_id, uint16_t product_id, uint16_t product_release):
     USBHID(get_usb_phy(), 0, 0, vendor_id, product_id, product_release)

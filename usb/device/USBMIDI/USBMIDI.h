@@ -65,7 +65,7 @@ public:
     * @param product_id Your product_id
     * @param product_release Your product_release
     */
-    USBMIDI(bool connect_blocking = true, uint16_t vendor_id = 0x0700, uint16_t product_id = 0x0101, uint16_t product_release = 0x0001);
+    USBMIDI(bool connect_blocking = true, std::uint16_t vendor_id = 0x0700, std::uint16_t product_id = 0x0101, std::uint16_t product_release = 0x0001);
 
     /**
     * Fully featured constructor
@@ -83,7 +83,7 @@ public:
     * @param product_id Your product_id
     * @param product_release Your product_release
     */
-    USBMIDI(USBPhy *phy, uint16_t vendor_id, uint16_t product_id, uint16_t product_release);
+    USBMIDI(USBPhy *phy, std::uint16_t vendor_id, std::uint16_t product_id, std::uint16_t product_release);
 
     /**
      * Destroy this object
@@ -145,33 +145,33 @@ protected:
 
     virtual void callback_request_xfer_done(const setup_packet_t *setup, bool aborted);
 
-    virtual void callback_set_configuration(uint8_t configuration);
+    virtual void callback_set_configuration(std::uint8_t configuration);
 
-    virtual void callback_set_interface(uint16_t interface, uint8_t alternate);
+    virtual void callback_set_interface(std::uint16_t interface, std::uint8_t alternate);
 
-    virtual const uint8_t *string_iproduct_desc();
+    virtual const std::uint8_t *string_iproduct_desc();
 
-    virtual const uint8_t *string_iinterface_desc();
+    virtual const std::uint8_t *string_iinterface_desc();
 
-    virtual const uint8_t *configuration_desc(uint8_t index);
+    virtual const std::uint8_t *configuration_desc(std::uint8_t index);
 
 private:
-    static const uint32_t MaxSize = 64;
+    static const std::uint32_t MaxSize = 64;
 
-    uint8_t _bulk_buf[MaxSize];
-    uint32_t _bulk_buf_pos;
-    uint32_t _bulk_buf_size;
+    std::uint8_t _bulk_buf[MaxSize];
+    std::uint32_t _bulk_buf_pos;
+    std::uint32_t _bulk_buf_size;
 
     bool _data_ready;
-    uint8_t _data[MAX_MIDI_MESSAGE_SIZE + 1];
-    uint32_t _cur_data;
+    std::uint8_t _data[MAX_MIDI_MESSAGE_SIZE + 1];
+    std::uint32_t _cur_data;
 
     rtos::EventFlags _flags;
     rtos::Mutex _write_mutex;
 
     usb_ep_t _bulk_in;
     usb_ep_t _bulk_out;
-    uint8_t _config_descriptor[0x65];
+    std::uint8_t _config_descriptor[0x65];
 
     Callback<void()> _callback;
 

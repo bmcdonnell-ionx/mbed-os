@@ -57,7 +57,7 @@ public:
     * @param product_release Your product_release (default: 0x0001)
     *
     */
-    USBSerial(bool connect_blocking=true, uint16_t vendor_id=0x1f00, uint16_t product_id=0x2012, uint16_t product_release=0x0001);
+    USBSerial(bool connect_blocking=true, std::uint16_t vendor_id=0x1f00, std::uint16_t product_id=0x2012, std::uint16_t product_release=0x0001);
 
     /**
     * Fully featured constructor
@@ -76,7 +76,7 @@ public:
     * @param product_release Your product_release (default: 0x0001)
     *
     */
-    USBSerial(USBPhy *phy, uint16_t vendor_id=0x1f00, uint16_t product_id=0x2012, uint16_t product_release=0x0001);
+    USBSerial(USBPhy *phy, std::uint16_t vendor_id=0x1f00, std::uint16_t product_id=0x2012, std::uint16_t product_release=0x0001);
 
     /**
      * Destroy this object
@@ -106,7 +106,7 @@ public:
     *
     * @returns the number of bytes available
     */
-    uint8_t available();
+    std::uint8_t available();
 
     /**
     * Check if the terminal is connected.

@@ -17,7 +17,7 @@
 #define TASK_BASE_H
 
 #include "LinkEntry.h"
-#include <stdint.h>
+#include <cstdint>
 
 namespace rtos {
 class Semaphore;
@@ -102,7 +102,7 @@ protected:
      *
      * @return requested buffer size
      */
-    virtual uint32_t size() = 0;
+    virtual std::uint32_t size() = 0;
 
     /**
      * Copy any callback data and return a callback to run
@@ -110,7 +110,7 @@ protected:
      * @param data Buffer to copy data to. Do not copy more than TaskBase::size() data.
      * @param size Maximum size to copy
      */
-    virtual run_callback_t start(void *data, uint32_t size) = 0;
+    virtual run_callback_t start(void *data, std::uint32_t size) = 0;
 
     /**
      * Inform this task that execution has finished.
@@ -127,7 +127,7 @@ private:
 
     TaskQueue *_queue;
     bool _posted;
-    uint16_t _start_count;
+    std::uint16_t _start_count;
     rtos::Semaphore *_flush_sem;
 
     friend class TaskQueue;
@@ -138,7 +138,7 @@ private:
      * This function should not be called directly. Instead
      * TaskQueue::task_start should be used instead.
      */
-    run_callback_t _start(void *buffer, uint32_t size);
+    run_callback_t _start(void *buffer, std::uint32_t size);
 
     /*
      * Must be called in a critical section

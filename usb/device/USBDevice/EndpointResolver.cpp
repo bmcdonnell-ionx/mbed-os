@@ -16,6 +16,8 @@
 
 #include "EndpointResolver.h"
 
+using namespace std;
+
 static uint32_t logical_to_index(uint32_t logical, bool in_not_out)
 {
     return (logical << 1) | (in_not_out ? 1 : 0);

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include <stddef.h>
+#include <cstddef>
 #include "usb_phy_api.h"
 #include "mbed_error.h"
 
